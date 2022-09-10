@@ -4,7 +4,11 @@ class Api::V1::InvoicesController < ApplicationController
 
   # GET /api/v1/invoices
   def index
-    @api_v1_invoices = Api::V1::Invoice.all
+    @api_v1_invoices = Api::V1::Invoice.where(nil)
+    @api_v1_invoices = @api_v1_invoices.filter_by_status(params[:api_v1_invoices][:status]) if params[:api_v1_invoices][:status].present?
+    @api_v1_invoices = @api_v1_invoices.filter_by_emitter(params[:api_v1_invoices][:emitter]) if params[:api_v1_invoices][:emitter].present?
+    @api_v1_invoices = @api_v1_invoices.filter_by_receiver(params[:api_v1_invoices][:receiver]) if params[:api_v1_invoices][:receiver].present?
+    @api_v1_invoices = @api_v1_invoices.filter_by_amount(params[:api_v1_invoices][:amount]) if params[:api_v1_invoices][:amount].present?
     render json: @api_v1_invoices
   end
 

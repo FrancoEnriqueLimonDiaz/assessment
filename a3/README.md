@@ -69,11 +69,12 @@ curl -XPOST -i -H "Content-Type: application/json" -d '{ "user": { "email": "fra
 create inovice
 curl -XPOST -H "Authorization: Bearer be0f5fc807f794ba168710e8c971c30805f99a73bd8f93603a8a70a182bc7cbcd061401b1c6481b19ea802878892ebfc6755975bd59e9139a91014db04630f60" -H "Content-Type: application/json" -d '{ "api_v1_invoice": { "status": "Active", "emitter": "User_id","receiver": "User_id", "amount": "123456"} }' http://localhost:3000/api/v1/invoices
 {
-    "invoice": {
-        "status": "Active",
-        "emitter": "User_id",
+    "api_v1_invoices": {
+        "status": "Inactive",
+        "emitter": "francoenrique@live.com",
         "receiver": "User_id",
-        "amount": "123456"
+        "amount": "59s803",
+        "emitted_at": ""
     }
 }
 
