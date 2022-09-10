@@ -54,4 +54,28 @@ This is the Rails starter code for take-home assessment.
   - Bonus: put it online. You can use Heroku, or any other similar
 - When you have completed, let us know by e-mail.
 
+# Create User
+sign up
+curl -XPOST -H "Content-Type: application/json" -d '{ "user": { "email": "francoenrique@live.com", "password": "123456" } }' http://localhost:3000/users
+Sign in
+curl -XPOST -i -H "Content-Type: application/json" -d '{ "user": { "email": "francoenrique@live.com", "password": "123456" } }' http://localhost:3000/users/sign_in
+{
+    "user": {
+        "email": "francoenrique@live.com",
+        "password": "123456"
+    }
+}
+# Create Inovice
+create inovice
+curl -XPOST -H "Authorization: Bearer be0f5fc807f794ba168710e8c971c30805f99a73bd8f93603a8a70a182bc7cbcd061401b1c6481b19ea802878892ebfc6755975bd59e9139a91014db04630f60" -H "Content-Type: application/json" -d '{ "api_v1_invoice": { "status": "Active", "emitter": "User_id","receiver": "User_id", "amount": "123456"} }' http://localhost:3000/api/v1/invoices
+{
+    "invoice": {
+        "status": "Active",
+        "emitter": "User_id",
+        "receiver": "User_id",
+        "amount": "123456"
+    }
+}
 
+# Create login
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjYyODM4NDQ5LCJleHAiOjE2NjQxMzQ0NDksImp0aSI6ImRlNzdhNmVmLTY2ZWQtNDYxZi04ZjIxLWUyZTUzMDZiNjc4ZSJ9._UEs9RRlgBGpzlhaAvfgyKwaI11Pa3B4O2iTE26nSpg 
