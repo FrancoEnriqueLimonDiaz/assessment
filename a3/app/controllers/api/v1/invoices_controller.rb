@@ -38,6 +38,12 @@ class Api::V1::InvoicesController < ApplicationController
     end
   end
 
+  def my_invoices
+    @api_v1_invoices = Api::V1::Invoice.all
+    byebug
+    render json: @api_v1_invoices
+  end
+
   # DELETE /api/v1/invoices/1
   def destroy
     @api_v1_invoice.destroy
