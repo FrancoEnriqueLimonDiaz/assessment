@@ -9,7 +9,10 @@ class Api::V1::InvoicesController < ApplicationController
     @api_v1_invoices = @api_v1_invoices.filter_by_emitter(params[:api_v1_invoices][:emitter]) if params[:api_v1_invoices][:emitter].present?
     @api_v1_invoices = @api_v1_invoices.filter_by_receiver(params[:api_v1_invoices][:receiver]) if params[:api_v1_invoices][:receiver].present?
     @api_v1_invoices = @api_v1_invoices.filter_by_amount(params[:api_v1_invoices][:amount]) if params[:api_v1_invoices][:amount].present?
-    render json: @api_v1_invoices
+    render json: { 
+      data: @api_v1_invoices, 
+      total_amount: @api_v1_invoices.pluck(:amount).sum.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
+    }, status: 200
   end
 
   # GET /api/v1/invoices/1
@@ -36,12 +39,6 @@ class Api::V1::InvoicesController < ApplicationController
     else
       render json: @api_v1_invoice.errors, status: :unprocessable_entity
     end
-  end
-
-  def my_invoices
-    @api_v1_invoices = Api::V1::Invoice.all
-    byebug
-    render json: @api_v1_invoices
   end
 
   # DELETE /api/v1/invoices/1

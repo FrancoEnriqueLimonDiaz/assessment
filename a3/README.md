@@ -73,7 +73,7 @@ curl -XPOST -H "Authorization: Bearer be0f5fc807f794ba168710e8c971c30805f99a73bd
         "status": "Inactive",
         "emitter": "francoenrique@live.com",
         "receiver": "User_id",
-        "amount": "59s803",
+        "amount": "59803",
         "emitted_at": ""
     }
 }
