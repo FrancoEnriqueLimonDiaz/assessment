@@ -4,10 +4,9 @@ module Api
   module V1
     class PostsController < ApplicationController
       before_action :set_api_v1_post, only: %i[show update destroy]
+      before_action :authenticate_user!
       require 'rqrcode'
-      require 'chunky_png'
 
-      # GET /api/v1/posts
       def index
         @data = []
         @files = ActiveStorage::Blob.all
@@ -17,12 +16,10 @@ module Api
         render json: @data, status: :ok
       end
 
-      # GET /api/v1/posts/1
       def show
         render json: @api_v1_post
       end
 
-      # POST /api/v1/posts
       def create
         @data = []
         @api_v1_posts = Api::V1::Post.new(api_v1_post_params)
@@ -31,7 +28,7 @@ module Api
           @files.each do |data|
             @data.push({ url: url_for(data) })
           end
-          render json: @api_v1_posts, status: :created
+          render json: @data, status: :ok
         else
           render json: @api_v1_post.errors, status: :unprocessable_entity
         end
@@ -63,7 +60,6 @@ module Api
         end
       end
 
-      # PATCH/PUT /api/v1/posts/1
       def update
         if @api_v1_post.update(api_v1_post_params)
           render json: @api_v1_post
@@ -72,16 +68,18 @@ module Api
         end
       end
 
+      def destroy
+        @api_v1_post.destroy
+      end
+
       private
 
-      # Use callbacks to share common setup or constraints between actions.
       def set_api_v1_post
         @api_v1_post = Api::V1::Post.find(params[:id])
       end
 
-      # Only allow a list of trusted parameters through.
       def api_v1_post_params
-        params.require(:api_v1_post).permit(:title, images: [])
+        params.require(:api_v1_post).permit(images: [])
       end
     end
   end

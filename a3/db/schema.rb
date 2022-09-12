@@ -54,7 +54,6 @@ ActiveRecord::Schema.define(version: 2022_09_11_220613) do
   end
 
   create_table "api_v1_posts", force: :cascade do |t|
-    t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
