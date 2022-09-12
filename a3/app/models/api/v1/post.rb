@@ -2,8 +2,8 @@
 
 module Api
   module V1
-    def self.table_name_prefix
-      'api_v1_'
+    class Post < ApplicationRecord
+      has_many_attached :images
     end
   end
 end

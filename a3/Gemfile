@@ -49,13 +49,17 @@ group :development do
 end
 
 # My gems
-gem 'rack-cors'
+gem 'active_model_serializers', '~> 0.10.13'
+gem 'byebug'
+gem 'chunky_png', '~> 1.4'
 gem 'devise'
 gem 'devise-jwt'
 gem 'dotenv-rails'
-gem 'byebug'
+gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
 gem 'net-smtp', '~> 0.3.1'
-gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+gem 'rack-cors'
+gem 'rqrcode', '~> 2.1', '>= 2.1.2'
+# gem 'shoulda-matchers', '~> 5.0'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data'
