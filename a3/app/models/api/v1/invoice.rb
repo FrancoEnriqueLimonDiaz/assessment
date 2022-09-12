@@ -16,9 +16,11 @@ module Api
       before_save { emitter.downcase! }
       before_save { receiver.downcase! }
       before_save :assign_date
+
       private
+
       def assign_date
-        self.emitted_at = Date.today.to_s
+        self.emitted_at = Time.zone.today.to_s
       end
     end
   end

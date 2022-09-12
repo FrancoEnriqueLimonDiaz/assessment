@@ -24,7 +24,8 @@ module Api
         if params[:api_v1_invoices][:emitted_at].present?
           @api_v1_invoices = @api_v1_invoices.filter_by_emitted_at(params[:api_v1_invoices][:emitted_at])
         end
-        render json: { data: @api_v1_invoices, total_amount: @api_v1_invoices.pluck(:amount).sum.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse },status: :ok
+        render json: { data: @api_v1_invoices, total_amount: @api_v1_invoices.pluck(:amount).sum.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse },
+               status: :ok
       end
 
       # GET /api/v1/invoices/1
@@ -36,7 +37,7 @@ module Api
       def create
         @api_v1_invoice = Api::V1::Invoice.new(api_v1_invoice_params)
         @api_v1_invoice.receiver = current_user.email
-        @api_v1_invoice.emitted_at = Date.today.to_s
+        @api_v1_invoice.emitted_at = Time.zone.today.to_s
         if @api_v1_invoice.save
           render json: @api_v1_invoice, status: :created, location: @api_v1_invoice
         else
@@ -58,7 +59,7 @@ module Api
         if @api_v1_invoice.destroy
           render json: "The #{@api_v1_invoice} was destroyed", status: :ok
         else
-          render json: "Problem with #{@api_v1_invoice}", status: :unprocessable_entity
+          render json: "Problem with #{@api_v1_invoice}", status: :ok
         end
       end
 

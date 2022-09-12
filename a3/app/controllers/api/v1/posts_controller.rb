@@ -12,7 +12,7 @@ module Api
         @data = []
         @files = ActiveStorage::Blob.all
         @files.each do |data|
-          @data.push({ id:data.id, url: url_for(data) })
+          @data.push({ id: data.id, url: url_for(data) })
         end
         render json: @data, status: :ok
       end
@@ -31,7 +31,7 @@ module Api
           @files.each do |data|
             @data.push({ url: url_for(data) })
           end
-          render json: @data, status: :ok
+          render json: @api_v1_posts, status: :created
         else
           render json: @api_v1_post.errors, status: :unprocessable_entity
         end
@@ -59,7 +59,7 @@ module Api
         if @xml[@get_selection - 1].present?
           render xml: @xml[@get_selection - 1], status: :ok
         else
-          render json: {message:'You reach the limit.', limit:@xml.count}, status: :unprocessable_entity
+          render json: { message: 'You reach the limit.', limit: @xml.count }, status: :unprocessable_entity
         end
       end
 
@@ -70,11 +70,6 @@ module Api
         else
           render json: @api_v1_post.errors, status: :unprocessable_entity
         end
-      end
-
-      # DELETE /api/v1/posts/1
-      def destroy
-        @api_v1_post.destroy
       end
 
       private
