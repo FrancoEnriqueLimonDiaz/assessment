@@ -53,5 +53,4 @@ This is the Rails starter code for take-home assessment.
   - Optional: use a client app or use Rails to render server/client side
   - Bonus: put it online. You can use Heroku, or any other similar
 - When you have completed, let us know by e-mail.
-
 ### * This is on heroku at `https://assessment-franco.herokuapp.com`
